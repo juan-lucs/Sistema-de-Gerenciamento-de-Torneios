@@ -7,15 +7,20 @@ import java.util.Map;
 public class Partida {
     private Time time1;
     private Time time2;
-    private LocalDate Date;
-    private Map<Time, Integer> placar = new HashMap<>();
+    private LocalDate dataPartida;
+    private Map<Time, Integer> placar = new HashMap<>(); // placar de UMA partida
 
-    public LocalDate getDate() {
-        return Date;
+    public Partida(Time time1, Time time2, LocalDate dataPartida) {
+        this.time1 = time1;
+        this.time2 = time2;
+        this.dataPartida = dataPartida;
+    }
+    public LocalDate getDataPartida() {
+        return dataPartida;
     }
 
-    public void setDate(LocalDate date) {
-        Date = date;
+    public void setDataPartida(LocalDate dataPartida) {
+        this.dataPartida = dataPartida;
     }
 
     public Time getTime1() {
@@ -34,14 +39,13 @@ public class Partida {
         this.time2 = time2;
     }
 
-    public void setPlacar(Time nome) {
-        placar.put(nome, 0);
+    public void setPlacar(Time nome, int pontos) {
+        placar.put(nome, pontos);
     }
 
     public Map<Time, Integer> getPlacar() {
         return new HashMap<>(placar); // MESMA COISA QUE O SET, CRIA UM NOVO PARA PROTECAO E BOA PRATICA
     }
-
 }
 
 

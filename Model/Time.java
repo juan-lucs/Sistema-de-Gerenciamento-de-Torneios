@@ -2,6 +2,7 @@ package Model;
 
 import enums.Modalidade;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,6 +11,16 @@ public class Time {
     private String nome;
     private Modalidade modalidade;
     private Set<Jogador> jogadores = new HashSet<>(); // USEI SET PARA NAO REPETIR OS JOGADORES
+
+    public Time(String nome, Modalidade modalidade) {
+        this.nome = nome;
+        this.modalidade = modalidade;
+    } // CONSTRUTOR PADRÃO
+
+    public Time(String nome) {
+        this.nome = nome;
+    }// CONSTRUTOR QUE EU USEI NO TORNEIOSERVICE
+
 
     public Modalidade getModalidade() {
         return modalidade;

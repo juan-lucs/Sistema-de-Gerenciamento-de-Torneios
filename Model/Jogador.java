@@ -3,9 +3,9 @@ package Model;
 import java.util.Objects;
 
 public class Jogador implements Comparable<Jogador> {
-    String nome;
-    int idade;
-    String posição;
+    private String nome;
+    private int idade;
+    private String posição;
 
     public String getPosição() {
         return posição;
