@@ -11,18 +11,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class TorneioService implements Exportavel, Classificavel, Estatistico {
+    Map<Time, Integer> pontosDeCadaTime = new HashMap<>();
     Set<Time> times = new HashSet<>();
     Set<Partida> partidas = new HashSet<>();
 
     public void registrarPartida(String time1, String time2, LocalDate dataPartida) {
         for (Time t : times) {
             if (t.getNome().equals(time1)) {
-                return t;
+                for (Time t2 : times) {
+                    if (t2.getNome().equals(time2)) {
+                        Partida p = new Partida(t, t2, dataPartida);
+                        partidas.add(p);
+                    }
+                }
             }
-        }
-
-        if (time.contains(new Time(time1)) && time.contains(new Time(time2)) {
-            new Partida(new Time(time1), time2, dataPartida);
         }
     }
     @Override
