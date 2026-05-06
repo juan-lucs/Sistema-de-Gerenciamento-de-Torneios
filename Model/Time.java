@@ -17,10 +17,9 @@ public class Time {
         this.modalidade = modalidade;
     } // CONSTRUTOR PADRÃO
 
-    public Time(String nome) {
-        this.nome = nome;
-    }// CONSTRUTOR QUE EU USEI NO TORNEIOSERVICE
-
+    public void setJogador(Jogador jogador) {
+        this.jogadores.add(jogador);
+    }
 
     public Modalidade getModalidade() {
         return modalidade;
