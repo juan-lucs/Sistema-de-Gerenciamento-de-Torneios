@@ -15,22 +15,19 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
     Set<Partida> partidas = new HashSet<>();
 
     public Map<Time, Integer> rankingtorneio() {
-        List pontost = new ArrayList<>();
-        for (Map.Entry<Time, Integer> entry : pontosDeCadaTime.entrySet()) { // Entryset retorna um SET com chave-valor de cada item, cada chave-valor é tratado como entry dentro do fo
-            Time time = entry.getKey();
-            Integer pontos = entry.getValue();
-            pontost.add(pontos);
-        }
-        Collections.sort(pontost);
-        for (Map.Entry<Time, Integer> entry : pontosDeCadaTime.entrySet()) {
-            Time time = entry.getKey();
-            Integer pontos = entry.getValue();
-            System.out.println();
-        }
+        List<Map.Entry<Time, Integer>> pontosList = new ArrayList<>(pontosDeCadaTime.entrySet());
+        pontosList.sort(Comparator.comparingInt(Map.Entry::getValue)); // sort é um método de List que ordena os elementos
+        /* Caomparator é uma interface do Java que representa o critério de comparação (por nome, idade e etc...) sort usa essa comparacao para ordenar
+        // comparingInt é um método de Comparator :
+        // Sem comparingInt (do zero)
+        //pontosList.sort((a, b) -> Integer.compare(a.getValue(), b.getValue()));
+        //
+        //// Com comparingInt (mais limpo, mesmo resultado)
+        pontosList.sort(Comparator.comparingInt(entry -> entry.getValue())); */
         return new HashMap<Time, Integer>(pontosDeCadaTime);
     }
 
-    //ESSE NOME TIME RECEBE APENAS O NOME DO TIME                       // ESSE JOGADOR RECEBE UM NEW JOGADOR(nome, posicao, idade)
+    //ALTERAR                     // ESSE JOGADOR RECEBE UM NEW JOGADOR(nome, posicao, idade)
     public void adicionarJogadorTime (String nometime, Jogador jogador) {
         Time time = null;
         for (Time t : times) {
@@ -48,7 +45,7 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
         }
 
     }
-    public void cadastrarTime(String nomeTime, Modalidade modalidade) {
+    public void cadastrarTime(String nomeTime, Modalidade modalidade) {// ALTERAR
         Time t = new Time(nomeTime, modalidade);
         times.add(t);
         System.out.println("Time cadastrado com sucesso!");
