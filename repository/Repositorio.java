@@ -19,7 +19,11 @@ public class Repositorio<T> {
         itens.remove(item);
     }
 
-    public List<T> listartodos() {
+    public List<T> listarTodos() {
         return new ArrayList<>(itens);
+    }
+    public int tamanho() {
+        itens.size();
+        return itens.size();
     }
 }
