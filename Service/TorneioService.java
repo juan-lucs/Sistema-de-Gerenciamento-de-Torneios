@@ -16,9 +16,7 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
     private Repositorio<Time> repositorio = new Repositorio<>();
     private Set<Partida> partidas = new HashSet<>();
 
-    // ========================
     // CADASTRAR TIME
-    // ========================
     public void cadastrarTime(String nomeTime, Modalidade modalidade) throws TimeDuplicadoException {
         for (Time t : repositorio.listarTodos()) {
             if (t.getNome().equalsIgnoreCase(nomeTime)) {
@@ -31,18 +29,14 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
         System.out.println("Time '" + nomeTime + "' cadastrado com sucesso!");
     }
 
-    // ========================
     // ADICIONAR JOGADOR AO TIME
-    // ========================
     public void adicionarJogadorTime(String nometime, Jogador jogador) throws TimeNaoEncontradoException, JogadorDuplicadoException {
         Time time = buscarTimePorNome(nometime);
         time.setJogador(jogador); // Time.setJogador já lança JogadorDuplicadoException se repetir
         System.out.println("Jogador '" + jogador.getNome() + "' adicionado ao time '" + time.getNome() + "' com sucesso!");
     }
 
-    // ========================
     // REGISTRAR PARTIDA
-    // ========================
     public void registrarPartida(String time1, String time2, LocalDate dataPartida, int pntstime1, int pntstime2)
             throws TimeNaoEncontradoException, TimeIncompletoException {
 
@@ -62,18 +56,14 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
         System.out.println("Partida registrada com sucesso!");
     }
 
-    // ========================
     // RANKING (decrescente)
-    // ========================
     public List<Map.Entry<Time, Integer>> rankingTorneio() {
         List<Map.Entry<Time, Integer>> pontosList = new ArrayList<>(pontosDeCadaTime.entrySet());
         pontosList.sort(Comparator.comparingInt(Map.Entry<Time, Integer>::getValue).reversed());
         return pontosList;
     }
 
-    // ========================
     // RESUMO DO TORNEIO
-    // ========================
     public void resumoTorneio() {
         System.out.println("\n=== RESUMO DO TORNEIO ===");
         System.out.println("Times participando: " + repositorio.tamanho());
@@ -81,27 +71,21 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
     }
 
 
-    // ========================
     // MÉTODO GENÉRICO DELIMITADO
-    // ========================
     public <T extends Jogador> void exibirJogadores(List<T> jogadores) {
         for (T j : jogadores) {
             System.out.println("  - " + j.getNome() + " | " + j.getIdade() + " anos");
         }
     }
 
-    // ========================
     // MÉTODO COM WILDCARD
-    // ========================
     public void listarTimes(List<? extends Time> times) {
         for (Time t : times) {
             System.out.println("  - " + t.getNome() + " [" + t.getModalidade() + "]");
         }
     }
 
-    // ========================
     // HELPER PRIVADO
-    // ========================
     private Time buscarTimePorNome(String nome) throws TimeNaoEncontradoException {
         for (Time t : repositorio.listarTodos()) {
             if (t.getNome().equalsIgnoreCase(nome)) {
@@ -111,18 +95,14 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
         throw new TimeNaoEncontradoException("Time '" + nome + "' não encontrado!");
     }
 
-    // ========================
     // GETTERS ÚTEIS
-    // ========================
     public List<Time> getTimes() {
         return repositorio.listarTodos();
     }
 
 
 
-    // ========================
     // INTERFACES
-    // ========================
     @Override
     public String getDados() {
         StringBuilder sb = new StringBuilder();
@@ -136,7 +116,7 @@ public class TorneioService implements Exportavel, Classificavel, Estatistico {
     }
 
     @Override
-    public int getPontuacao() {
+    public int getmaiorPontuacao() {
         // retorna a maior pontuação do torneio
         return pontosDeCadaTime.values().stream()
                 .mapToInt(Integer::intValue)
