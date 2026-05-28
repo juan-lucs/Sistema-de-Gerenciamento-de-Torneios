@@ -45,7 +45,7 @@ public class ProgramMain {
 
                 case 1 -> {
                     // ── CADASTRAR TIME ──
-                    System.out.print("Nome do time: ");
+                    System.out.print("Nome do time : ");
                     String nomeTime = sc.nextLine().trim();
 
                     System.out.println("Modalidade:");
